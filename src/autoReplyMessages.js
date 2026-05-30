@@ -1,16 +1,15 @@
-// แต่ละ object คือ 1 ข้อความ — type: 'text' | 'image' | 'emoji'
 const AUTO_REPLY_MESSAGES = [
   {
     type: 'text',
-    content: 'สวัสดีครับ! ขอบคุณที่ทักมานะครับ ตอนนี้ไม่อยู่ จะรีบตอบกลับโดยเร็วที่สุดเลยครับ',
+    content: 'รบกวนฝากกดใจ กดติดตามไอจี กดแชร์ และกดเข้าลิ้งค์ไดรฟ์ได้เลยน้าา ถ้าเข้าได้แล้วรบกวนฝากบอกอีกทีด้วยน้า🙏🎀https://drive.google.com/drive/folders/18dKY8DLHYNEc3swiz8mtLlDcNaKMVjo2',
   },
   {
     type: 'image',
     content: 'https://raw.githubusercontent.com/reenx8/ikmath-api/main/ikmath.jpg',
   },
   {
-    type: 'emoji',
-    content: '🙏😊✨',
+    type: 'image',
+    content: 'https://media3.giphy.com/media/v1.Y2lkPTQyMzA0NmQwYnNvZmRwZXJyYmswYTJwMWhvZmFzdnVsOTAxaTNhdHIybmdkM3VhZSZlcD12MV9naWZzX2dpZklkJmN0PXM/ks0hgDgVEl7SJFGOxc/200.gif',
   },
 ];
 
