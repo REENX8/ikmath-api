@@ -6,7 +6,7 @@ const AUTO_REPLY_MESSAGES = [
   },
   {
     type: 'image',
-    content: 'https://your-image-url.com/welcome.jpg', // เปลี่ยนเป็น URL รูปที่ต้องการ
+    content: 'https://raw.githubusercontent.com/reenx8/ikmath-api/main/ikmath.jpg',
   },
   {
     type: 'emoji',
