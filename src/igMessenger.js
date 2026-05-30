@@ -1,23 +1,33 @@
 const axios = require('axios');
 const { pageAccessToken, metaApiUrl } = require('./config');
 
-async function sendMessage(recipientId, text) {
+function buildMessagePayload(msg) {
+  if (msg.type === 'image') {
+    return {
+      attachment: {
+        type: 'image',
+        payload: { url: msg.content, is_reusable: true },
+      },
+    };
+  }
+  // 'text' และ 'emoji' ส่งเหมือนกันคือ text field
+  return { text: msg.content };
+}
+
+async function sendMessage(recipientId, msg) {
   await axios.post(
     `${metaApiUrl}/me/messages`,
     {
       recipient: { id: recipientId },
-      message: { text },
+      message: buildMessagePayload(msg),
     },
-    {
-      params: { access_token: pageAccessToken },
-    }
+    { params: { access_token: pageAccessToken } }
   );
 }
 
 async function sendAutoReplies(recipientId, messages) {
-  for (const text of messages) {
-    await sendMessage(recipientId, text);
-    // หน่วงเล็กน้อยเพื่อให้ข้อความมาตามลำดับ
+  for (const msg of messages) {
+    await sendMessage(recipientId, msg);
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
 }
