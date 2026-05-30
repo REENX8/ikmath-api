@@ -29,6 +29,6 @@ app.post('/webhook', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`IG Auto Reply server running on port ${port}`);
 });

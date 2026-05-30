@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ikmath-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: VERIFY_TOKEN
+        sync: false
+      - key: PAGE_ACCESS_TOKEN
+        sync: false
+      - key: IG_USER_ID
+        sync: false
