@@ -1,6 +1,7 @@
 const express = require('express');
 const { verifyToken, port } = require('./config');
 const { handleWebhook } = require('./webhookHandler');
+const supabase = require('./supabase');
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,21 @@ app.post('/webhook', async (req, res) => {
     await handleWebhook(req.body);
   } catch (err) {
     console.error('Webhook handler error:', err.response?.data ?? err.message);
+  }
+});
+
+app.get('/stats', async (req, res) => {
+  try {
+    const [{ count: totalUsers }, { count: totalSuccess }, { count: totalFailed }, { data: recent }] =
+      await Promise.all([
+        supabase.from('replied_senders').select('*', { count: 'exact', head: true }),
+        supabase.from('reply_logs').select('*', { count: 'exact', head: true }).eq('status', 'success'),
+        supabase.from('reply_logs').select('*', { count: 'exact', head: true }).eq('status', 'failed'),
+        supabase.from('reply_logs').select('*').order('created_at', { ascending: false }).limit(10),
+      ]);
+    res.json({ totalUsers, totalSuccess, totalFailed, recent });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
