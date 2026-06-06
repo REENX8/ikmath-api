@@ -5,6 +5,8 @@ const { handleWebhook } = require('./webhookHandler');
 const app = express();
 app.use(express.json());
 
+app.get('/health', (req, res) => res.sendStatus(200));
+
 // Webhook verification (Meta จะ GET มาตอน setup)
 app.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode'];
